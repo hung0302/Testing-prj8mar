@@ -85,11 +85,11 @@
 <body>
     <div class="card">
         <h1>Gửi lời nhắn</h1>
-        <p>Điền tên và nội dung, dữ liệu sẽ được lưu vào Google Sheet.</p>
+        <p>Điền email và nội dung, dữ liệu sẽ được lưu vào Google Sheet.</p>
 
         <form id="messageForm">
-            <label for="name">Tên</label>
-            <input type="text" id="name" name="name" placeholder="Nhập tên của bạn" required />
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required />
 
             <label for="content">Nội dung</label>
             <textarea id="content" name="content" placeholder="Viết điều bạn muốn gửi" required></textarea>
@@ -110,10 +110,10 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
             const content = document.getElementById('content').value.trim();
 
-            if (!name || !content) {
+            if (!email || !content) {
                 statusEl.textContent = 'Vui lòng nhập đầy đủ thông tin.';
                 statusEl.className = 'status error';
                 return;
@@ -125,7 +125,7 @@
             try {
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    body: JSON.stringify({ name, content }),
+                    body: JSON.stringify({ email, content }),
                     headers: {
                         'Content-Type': 'text/plain;charset=utf-8'
                     }
